@@ -1,44 +1,303 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Basit Oda</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nazlı ❤️</title>
     <style>
-        body { font-family: sans-serif; text-align: center; background: #f0f2f5; }
-        #oda { border: 2px solid #333; width: 300px; margin: 20px auto; padding: 20px; background: white; border-radius: 15px; }
-        .oyuncu { background: #e1ffc7; margin: 5px; padding: 10px; border-radius: 5px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffe5ec, #ffb3c6);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            color: #4a0e17;
+            position: relative;
+        }
+
+        /* Kalp Patlama Efekti */
+        .heart-particle {
+            position: absolute;
+            pointer-events: none;
+            font-size: 24px;
+            animation: floatUp 1.5s ease-out forwards;
+            z-index: 999;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Ana Kart Tasarımı */
+        .container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(255, 75, 110, 0.2);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            z-index: 10;
+            margin-bottom: 20px;
+            border: 2px solid #ff85a2;
+        }
+
+        /* Profil Fotoğrafı */
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ff4b6e;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #ff4b6e;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        p.subtitle {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        /* Not Gösterme Alanı */
+        #note-display {
+            min-height: 50px;
+            background: #fff0f3;
+            padding: 12px;
+            border-radius: 15px;
+            border-left: 5px solid #ff4b6e;
+            font-weight: 500;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.5s;
+        }
+
+        /* Uçan Balonlar */
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 60px;
+            height: 75px;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            cursor: pointer;
+            animation: flyUp var(--duration) linear infinite;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: inset -5px -5px 10px rgba(0,0,0,0.1);
+        }
+
+        .balloon:after {
+            content: "▲";
+            position: absolute;
+            bottom: -8px;
+            font-size: 10px;
+            color: inherit;
+        }
+
+        /* Gizli YouTube Oynatıcı */
+        #youtube-audio {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes flyUp {
+            0% {
+                bottom: -100px;
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(var(--wobble));
+            }
+            100% {
+                bottom: 105vh;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
 
-    <h1>Sesli Oda Taslağı</h1>
-    
-    <div id="oda">
-        <h3>İçeridekiler</h3>
-        <div id="liste">
-            <p>Henüz kimse yok...</p>
-        </div>
+    <div id="youtube-audio"></div>
+
+    <div class="container">
+        <!-- Fotoğraf adını tam istediğin gibi 'nazlım.jpg' olarak güncelledim -->
+        <img src="nazlım.jpg" alt="Nazlı" class="profile-img">
+        
+        <h1>İyi ki Varsın Nazlı'm ❤️</h1>
+        <p class="subtitle">Seninle her an, bir ömre bedel...</p>
+        
+        <p style="font-size: 0.9rem; color: #ff4b6e; font-weight: bold; margin-bottom: 5px;">🎈 Balonları patlatarak notlarımı oku! 🎈</p>
+        <span style="font-size: 0.75rem; color: #7a5c61; font-style: italic;">(Müzik için ekrana dokunmayı unutma)</span>
+        
+        <div id="note-display">çok şanslıyım... iyi ki varsın!</div>
     </div>
 
-    <input type="text" id="isimInput" placeholder="Adını yaz...">
-    <button onclick="katil()">Odaya Gir</button>
-
     <script>
-        function katil() {
-            let isim = document.getElementById('isimInput').value;
-            if(isim) {
-                let liste = document.getElementById('liste');
-                // Eğer ilk kişi giriyorsa "henüz kimse yok" yazısını sil
-                if(liste.innerHTML.includes("Henüz")) liste.innerHTML = "";
-                
-                // Yeni bir oyuncu kutusu oluştur
-                liste.innerHTML += <div class="oyuncu">🟢 ${isim}</div>;
-                document.getElementById('isimInput').value = ""; // Kutuyu temizle
-            } else {
-                alert("Lütfen bir isim yaz!");
+        const notes = [
+            "Gülüşün dünyadaki en güzel manzara... 🥰",
+            "Kalbimin en güzel köşesi tamamen seninle dolu. 💖",
+            "Sen benim hayatımda başıma gelen en güzel şeysin. 🌹",
+            "Gözlerin bana her baktığında yeniden aşık oluyorum. ✨",
+            "Seninle geçen her saniye benim için çok değerli. ⏳❤️",
+            "Dünyanın en tatlı, en özel insanı... İyi ki varsın! 😍",
+            "Seni her gün bir önceki günden daha çok seviyorum. ♾️",
+            "enayisin falan ama seni seviyorum 🤪❤️",
+            "Bizden bir adet BURAK DEVECİ kazandınız! 🎁🕺"
+        ];
+
+        const balloonColors = ['#ff4b6e', '#ff7096', '#ff85a2', '#fbb1bd', '#ff99c8'];
+        let musicStarted = false;
+        let player;
+
+        // YouTube Iframe API Entegrasyonu
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-audio', {
+                height: '1',
+                width: '1',
+                videoId: 'naUqWQ-of6o', 
+                playerVars: {
+                    'autoplay': 0,
+                    'loop': 1,
+                    'playlist': 'naUqWQ-of6o',
+                    'controls': 0,
+                    'showinfo': 0,
+                    'modestbranding': 1
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Player hazır
+        }
+
+        function startMusic() {
+            if (!musicStarted && player && typeof player.playVideo === 'function') {
+                player.playVideo();
+                musicStarted = true;
             }
         }
-    </script>
 
+        function createBalloon() {
+            const balloon = document.createElement('div');
+            balloon.classList.add('balloon');
+            
+            const color = balloonColors[Math.floor(Math.random() * balloonColors.length)];
+            const duration = Math.random() * 4 + 6; 
+            const leftPos = Math.random() * 85; 
+            const wobble = (Math.random() * 100 - 50) + 'px'; 
+
+            balloon.style.backgroundColor = color;
+            balloon.style.color = color;
+            balloon.style.left = leftPos + '%';
+            balloon.style.setProperty('--duration', duration + 's');
+            balloon.style.setProperty('--wobble', wobble);
+            balloon.innerText = "🎈";
+
+            balloon.addEventListener('click', (e) => {
+                startMusic(); 
+                createHeartExplosion(e.clientX, e.clientY);
+                
+                const randomNote = notes[Math.floor(Math.random() * notes.length)];
+                const display = document.getElementById('note-display');
+                
+                display.style.animation = 'none';
+                display.offsetHeight; 
+                display.innerText = randomNote;
+                display.style.animation = 'fadeIn 0.5s';
+
+                balloon.remove();
+            });
+
+            document.body.appendChild(balloon);
+
+            setTimeout(() => {
+                if(balloon.parentNode) balloon.remove();
+            }, duration * 1000);
+        }
+
+        function createHeartExplosion(x, y) {
+            const heartCount = 12; 
+            const hearts = ['❤️', '💖', '💝', '💘', '💕'];
+            
+            for (let i = 0; i < heartCount; i++) {
+                const p = document.createElement('div');
+                p.classList.add('heart-particle');
+                p.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+                p.style.left = x + 'px';
+                p.style.top = y + 'px';
+
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = Math.random() * 120 + 40;
+                const targetX = Math.cos(angle) * velocity + 'px';
+                const targetY = Math.sin(angle) * velocity + 'px';
+
+                p.style.setProperty('--x', targetX);
+                p.style.setProperty('--y', targetY);
+
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 1500);
+            }
+        }
+
+        setInterval(createBalloon, 1500);
+        for(let i=0; i<3; i++) setTimeout(createBalloon, i * 500);
+
+        window.addEventListener('click', (e) => {
+            startMusic();
+            if (!e.target.closest('.container') && !e.target.classList.contains('balloon')) {
+                createHeartExplosion(e.clientX, e.clientY);
+            }
+        });
+    </script>
 </body>
 </html>
